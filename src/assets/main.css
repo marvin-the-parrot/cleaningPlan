@@ -1,0 +1,135 @@
+
+#app {
+  padding: 0;
+  width: 100%;
+  font-weight: normal;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #ff527c;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 0px #ffd8d8, 5px 5px 0px #dbf8e3;
+  animation: swing 3s alternate linear infinite;
+  animation-delay: 0s;
+  transform-origin: center center;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(-15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(15deg);
+  }
+}
+
+td {
+  font-family: 'Roboto Mono', monospace;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+body {
+  background-color: #f9f7f7;
+  font-family: Arial, sans-serif;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #ffd8d8;
+  color: #ff527c;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+td {
+  color: #2d985e;
+  padding: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+td div{
+  /* Spacing contents evenly */
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
+tr:nth-child(odd) {
+  background-color: #dbf8e3;
+}
+
+tr:hover {
+  background-color: #ffe4e1;
+}
+
+tr:nth-child(2) {
+  background-color: #b20c37;
+}
+tr:nth-child(3) >td {
+  font-size: 24px;
+}
+
+/* Custom checkbox style */
+.checkbox-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.checkbox-custom {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background-color: #ffd8d8;
+  position: relative;
+}
+
+.checkbox-custom::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background-color: #2d985e;
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.checkbox-container input[type="checkbox"]:checked ~ .checkbox-custom::after {
+  opacity: 1;
+}
