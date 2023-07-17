@@ -3,7 +3,7 @@
   <table>
     <thead>
     <tr>
-      <th>Date</th>
+      <th>Cleaned until</th>
       <th v-for="area in areas">{{ area }}</th>
     </tr>
     <tr v-for="(date,i) in dates" :key="date">
