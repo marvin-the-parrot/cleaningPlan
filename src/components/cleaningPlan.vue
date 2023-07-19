@@ -7,8 +7,8 @@
       <th v-for="area in areas">{{ area }}</th>
     </tr>
     <tr v-for="(date,i) in dates" :key="date">
-      <td>{{ date }}</td>
-      <textAndButton v-for="(_,offset) in cleaners">{{ cleaners[(i + offset + weekCorrection) % 3] }}</textAndButton>
+      <td>{{ date }} </td>
+      <textAndButton v-for="(_,offset) in cleaners">{{ cleaners[(i*2 + offset + weekCorrection) % 3] }}</textAndButton>
     </tr>
     </thead>
   </table>
@@ -17,6 +17,7 @@
 
 <script>
 import TextAndButton from "@/components/textAndButton.vue";
+
 export default {
   name: "cleaningplan",
   components: {TextAndButton},
@@ -34,7 +35,8 @@ export default {
       const result = [];
       const currentDate = new Date();
 
-      this.weekCorrection = this.getWeeksSinceStartDate('2023-01-01')%3 + 2;
+      this.weekCorrection = this.getWeeksSinceStartDate('2023-01-04', currentDate) % 3 +1;
+      console.log(this.weekCorrection)
       // Find the previous Wednesday
       const previousWednesday = new Date();
       previousWednesday.setDate(currentDate.getDate() - (currentDate.getDay() + 4) % 7);
@@ -57,18 +59,18 @@ export default {
   },
 
   methods: {
-    getWeeksSinceStartDate(startDate) {
+    getWeeksSinceStartDate(startDate, today) {
       const start = new Date(startDate); // Convert the start date string to a Date object
-      const today = new Date(); // Get the current date
 
       // Calculate the time difference in milliseconds
       const timeDiff = today.getTime() - start.getTime();
 
       // Calculate the number of weeks
       const weeks = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 7));
+      console.log(weeks)
 
       return weeks;
-}
+    }
   }
 };
 
