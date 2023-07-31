@@ -8,7 +8,7 @@
     </tr>
     <tr v-for="(date,i) in dates" :key="date">
       <td>{{ date }} </td>
-      <textAndButton v-for="(_,offset) in cleaners">{{ cleaners[(i*2 + offset + weekCorrection) % 3] }}</textAndButton>
+      <textAndButton v-for="(_,offset) in cleaners">{{ cleaners[(i + offset + weekCorrection + 2) % 3] }}</textAndButton>
     </tr>
     </thead>
   </table>
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       areas: ['Wohnzimmer + Küche', 'Toilette', 'Bad + Gang'],
-      cleaners: ['Gregor', 'Dominik', 'Marvin'],
+      cleaners: ['Dominik','Gregor', 'Marvin'],
       numOfDates: 6,
       weekCorrection: 0,
     };
@@ -33,13 +33,12 @@ export default {
   computed: {
     dates() {
       const result = [];
-      const currentDate = new Date();
+      const currentDate = new Date()
 
-      this.weekCorrection = this.getWeeksSinceStartDate('2023-01-04', currentDate) % 3 +1;
-      console.log(this.weekCorrection)
+      this.weekCorrection = this.getWeeksSinceStartDate('2023-01-05', currentDate) % 3 +1;
       // Find the previous Wednesday
-      const previousWednesday = new Date();
-      previousWednesday.setDate(currentDate.getDate() - (currentDate.getDay() + 4) % 7);
+      const dist = (new Date(currentDate).getDay() - 3 + 7) % 7;
+      const previousWednesday = new Date(currentDate.getFullYear(), currentDate.getMonth(), +currentDate.getDate() - (dist || 7));
       // Add the previous Wednesday to the result
       result.push(previousWednesday.toDateString());
 
